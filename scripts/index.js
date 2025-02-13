@@ -5,30 +5,35 @@ const popup = document.querySelector(".popup_type_new-card");
 const closeButton = popup.querySelector(".popup__close");
 const form = popup.querySelector(".popup__form");
 
-function createCard(card) {
-  const cardElement = cardTemplate.cloneNode(true);
+function createCard(data, onDelete) {
+  const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
   const imgElement = cardElement.querySelector(".card__image");
   const titleElement = cardElement.querySelector(".card__title");
   const deleteButton = cardElement.querySelector(".card__delete-button");
 
-  imgElement.src = card.link;
-  imgElement.alt = card.name;
-  titleElement.textContent = card.name;
+  imgElement.src = data.link;
+  imgElement.alt = data.name;
+  titleElement.textContent = data.name;
 
   deleteButton.addEventListener("click", () => {
-    const cardDelete = deleteButton.closest(".card");
-    cardDelete.remove();
+    onDelete(cardElement);
   });
 
   return cardElement;
 }
 
-function renderCards() {
-  placesContainer.innerHTML = "";
-  initialCards.forEach((card) => {
-    placesContainer.appendChild(createCard(card));
-  });
+function handleDeleteCard(cardElement) {
+  cardElement.remove();
 }
+
+function renderCard(cardElement) {
+  placesContainer.appendChild(cardElement); 
+}
+
+initialCards.forEach((card) => {
+  const cardElement = createCard(card, handleDeleteCard); 
+  renderCard(cardElement); 
+});
 
 function openPopup() {
   popup.classList.add("popup_is-opened");
@@ -46,12 +51,11 @@ form.addEventListener("submit", (event) => {
 
   const placeName = form.elements["place-name"].value;
   const placeLink = form.elements["link"].value;
+  const newCard = { name: placeName, link: placeLink };
+  initialCards.push(newCard); 
 
-  initialCards.push({ name: placeName, link: placeLink });
-
-  renderCards();
+  const cardElement = createCard(newCard, handleDeleteCard); 
+  renderCard(cardElement);
   closePopup();
   form.reset();
 });
-
-renderCards();
