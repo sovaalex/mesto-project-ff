@@ -12,11 +12,12 @@ function createCard(card) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
 
   imgElement.src = card.link;
+  imgElement.alt = card.name;
   titleElement.textContent = card.name;
 
   deleteButton.addEventListener("click", () => {
-    initialCards.splice(initialCards.indexOf(card), 1);
-    renderCards();
+    const cardDelete = deleteButton.closest(".card");
+    cardDelete.remove();
   });
 
   return cardElement;
