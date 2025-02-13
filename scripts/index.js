@@ -6,7 +6,9 @@ const closeButton = popup.querySelector(".popup__close");
 const form = popup.querySelector(".popup__form");
 
 function createCard(data, onDelete) {
-  const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
+  const cardElement = cardTemplate
+    .querySelector(".places__item")
+    .cloneNode(true);
   const imgElement = cardElement.querySelector(".card__image");
   const titleElement = cardElement.querySelector(".card__title");
   const deleteButton = cardElement.querySelector(".card__delete-button");
@@ -27,12 +29,12 @@ function handleDeleteCard(cardElement) {
 }
 
 function renderCard(cardElement) {
-  placesContainer.appendChild(cardElement); 
+  placesContainer.appendChild(cardElement);
 }
 
 initialCards.forEach((card) => {
-  const cardElement = createCard(card, handleDeleteCard); 
-  renderCard(cardElement); 
+  const cardElement = createCard(card, handleDeleteCard);
+  renderCard(cardElement);
 });
 
 function openPopup() {
@@ -49,13 +51,13 @@ closeButton.addEventListener("click", closePopup);
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const placeName = form.elements["place-name"].value;
-  const placeLink = form.elements["link"].value;
-  const newCard = { name: placeName, link: placeLink };
-  initialCards.push(newCard); 
+  const newCard = {
+    name: form.elements["place-name"].value,
+    link: form.elements["link"].value,
+  };
 
-  const cardElement = createCard(newCard, handleDeleteCard); 
-  renderCard(cardElement);
-  closePopup();
+  initialCards.push(newCard);
+  renderCard(createCard(newCard, handleDeleteCard));
+  closePopup;
   form.reset();
 });
