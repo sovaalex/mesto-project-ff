@@ -1,12 +1,7 @@
 export function openModal(modal) {
-  setTimeout(() => {
-  modal.classList.add("popup_is-opened");});
-  modal.classList.add("popup_is-animated");
+  modal.classList.add("popup_is-opened");
 }
 
 export function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
-  setTimeout(() => {
-    modal.classList.remove("popup_is-animated");
-  }, 600);
 }
