@@ -19,6 +19,9 @@ const linkInput = newPlaceForm.elements["link"];
 const nameInput = editProfileForm.elements["name"];
 const descriptionInput = editProfileForm.elements["description"];
 
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+
 const modals = document.querySelectorAll(".popup");
 
 modals.forEach(modal => {
@@ -43,9 +46,10 @@ initialCards.forEach(card => {
 });
 
 addButton.addEventListener("click", () => openModal(addCardPopup));
+
 editButton.addEventListener("click", () => {
-  nameInput.value = document.querySelector(".profile__title").textContent;
-  descriptionInput.value = document.querySelector(".profile__description").textContent;
+  nameInput.value = profileTitle.textContent;
+  descriptionInput.value = profileDescription.textContent;
   openModal(editPopup);
 });
 
@@ -71,8 +75,8 @@ newPlaceForm.addEventListener("submit", (event) => {
 });
 
 function updateProfile({ name, description }) {
-  document.querySelector(".profile__title").textContent = name;
-  document.querySelector(".profile__description").textContent = description;
+  profileTitle.textContent = name;
+  profileDescription.textContent = description;
 }
 
 editProfileForm.addEventListener("submit", (event) => {
