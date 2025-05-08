@@ -1,3 +1,9 @@
+@import url('./__button/popup__button.css');
+@import url('./__button/__disabled/button_inactive.css');
+@import url('./__input/popup__input.css');
+@import url('./__input/input_error/input_type_error.css');
+@import url('./error_text/input_error_text.css');
+
 .popup__form {
   margin-top: 27px;
 }
