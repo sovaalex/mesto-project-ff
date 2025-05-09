@@ -59,8 +59,7 @@ export function updateUserAvatar(avatarLink) {
 }
 
 export function loadUserDataAndCards() {
-  return Promise.all([getUserInfo(), getCards()])
-    .then(([userInfo, cards]) => {
-      return { userInfo, cards };
-    });
+  return Promise.all([getUserInfo(), getCards()]).then(([userInfo, cards]) => {
+    return { userInfo, cards };
+  });
 }

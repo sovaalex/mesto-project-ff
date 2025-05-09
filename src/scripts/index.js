@@ -1,8 +1,5 @@
 import "../pages/index.css";
-import {
-  createCard,
-  handleLikeButtonClick
-} from "../components/card";
+import { createCard, handleLikeButtonClick } from "../components/card";
 import { openModal, closeModal, handleModalClose } from "../components/modal";
 import { enableValidation, clearValidation } from "../components/validation";
 import * as api from "../components/api.js";
@@ -54,7 +51,7 @@ confirmDeleteForm.addEventListener("submit", (event) => {
         cardElementToDelete = null;
         confirmDeleteCardPopup.classList.remove("popup_is-opened");
       })
-      .catch((err) => console.error("Ошибка при удалении карточки:", err)) 
+      .catch((err) => console.error("Ошибка при удалении карточки:", err))
       .finally(() => {
         confirmDeleteButton.textContent = "Да";
       });
@@ -62,8 +59,8 @@ confirmDeleteForm.addEventListener("submit", (event) => {
 });
 
 function handleDelete(cardElement) {
-  cardElementToDelete = cardElement; 
-  openModal(confirmDeleteCardPopup); 
+  cardElementToDelete = cardElement;
+  openModal(confirmDeleteCardPopup);
 }
 
 api
@@ -89,7 +86,7 @@ api
   });
 
 changeAvatarForm.addEventListener("submit", (event) => {
-  event.preventDefault()
+  event.preventDefault();
   changeAvatarButton.textContent = "Сохраняем...";
   const newAvatarLink = avatarLinkInput.value;
   api
@@ -106,12 +103,11 @@ changeAvatarForm.addEventListener("submit", (event) => {
     });
 });
 
-avatar.addEventListener("click", () => { 
+avatar.addEventListener("click", () => {
   avatarLinkInput.value = "";
-  clearValidation(changeAvatarForm, validationConfig)
-  openModal(changeAvatarPopup); 
-}); 
-
+  clearValidation(changeAvatarForm, validationConfig);
+  openModal(changeAvatarPopup);
+});
 
 const validationConfig = {
   formSelector: ".popup__form",

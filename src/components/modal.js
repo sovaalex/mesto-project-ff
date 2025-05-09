@@ -11,7 +11,7 @@ export function closeModal(modal) {
 function handleEscapeKey(event) {
   if (event.key === "Escape") {
     const openPopups = document.querySelectorAll(".popup_is-opened");
-    openPopups.forEach(popup => closeModal(popup));
+    openPopups.forEach((popup) => closeModal(popup));
   }
 }
 

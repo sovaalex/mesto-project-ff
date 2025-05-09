@@ -1,7 +1,5 @@
 import * as api from "./api";
 
-
-
 export function createCard(
   data,
   handleLike,
