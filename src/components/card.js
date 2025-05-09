@@ -1,13 +1,6 @@
-import { openModal } from "./modal";
 import * as api from "./api";
 
-const confirmDeleteCardPopup = document.querySelector(
-  ".popup_type_delete-card"
-);
-const confirmDeleteButton =
-  confirmDeleteCardPopup.querySelector(".popup__button");
-const confirmDeleteForm = document.forms["delete-form"];
-let cardElementToDelete;
+
 
 export function createCard(
   data,
@@ -48,8 +41,7 @@ export function createCard(
   );
 
   deleteButton.addEventListener("click", () => {
-    cardElementToDelete = cardElement;
-    handleDelete();
+    handleDelete(cardElement);
   });
 
   likeElement.addEventListener("click", (event) =>
@@ -83,26 +75,3 @@ export function handleLikeButtonClick(event, likeCount) {
       .catch((err) => console.error("Ошибка при добавлении лайка:", err));
   }
 }
-
-export function handleDeleteCard() {
-  openModal(confirmDeleteCardPopup);
-}
-
-confirmDeleteForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (cardElementToDelete) {
-    confirmDeleteButton.textContent = "Удаляем...";
-    const cardId = cardElementToDelete.dataset.id;
-    api
-      .deleteCard(cardId)
-      .then(() => {
-        cardElementToDelete.remove();
-        cardElementToDelete = null;
-        confirmDeleteCardPopup.classList.remove("popup_is-opened");
-      })
-      .catch((err) => console.error("Ошибка при удалении карточки:", err))
-      .finally(() => {
-        confirmDeleteButton.textContent = "Да";
-      });
-  }
-});

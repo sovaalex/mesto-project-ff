@@ -25,12 +25,14 @@ function hasInvalidInput(inputList) {
   });
 }
 
-export function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("button_inactive");
-  } else {
-    buttonElement.classList.remove("button_inactive");
-  }
+export function toggleButtonState(inputList, buttonElement) { 
+  if (hasInvalidInput(inputList)) { 
+    buttonElement.classList.add("button_inactive"); 
+    buttonElement.setAttribute("disabled", true);
+  } else { 
+    buttonElement.classList.remove("button_inactive"); 
+    buttonElement.removeAttribute("disabled"); 
+  } 
 }
 
 export function clearValidation(formElement, validationConfig) {
@@ -41,6 +43,12 @@ export function clearValidation(formElement, validationConfig) {
 }
 
 function checkInputValidity(formElement, inputElement) {
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage)
+  } else {
+    inputElement.setCustomValidity("")
+  }
+
   const isValid = inputElement.validity.valid && 
   (!inputElement.pattern || new RegExp(inputElement.pattern).test(inputElement.value));
   
@@ -68,10 +76,6 @@ function setEventListeners(formElement) {
 export function enableValidation() {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-
     setEventListeners(formElement);
   });
 }

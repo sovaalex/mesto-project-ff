@@ -62,8 +62,5 @@ export function loadUserDataAndCards() {
   return Promise.all([getUserInfo(), getCards()])
     .then(([userInfo, cards]) => {
       return { userInfo, cards };
-    })
-    .catch((err) => {
-      console.error("Ошибка при загрузке данных:", err);
     });
 }
