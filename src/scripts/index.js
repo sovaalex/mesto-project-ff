@@ -1,7 +1,7 @@
 import "../pages/index.css";
 import { createCard, handleLikeButtonClick } from "../components/card";
 import { openModal, closeModal, handleModalClose } from "../components/modal";
-import { enableValidation, clearValidation } from "../components/validation";
+import { enableValidation, clearValidation, validationConfig } from "../components/validation";
 import * as api from "../components/api.js";
 
 const placesContainer = document.querySelector(".places__list");
@@ -108,15 +108,6 @@ avatar.addEventListener("click", () => {
   clearValidation(changeAvatarForm, validationConfig);
   openModal(changeAvatarPopup);
 });
-
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
 
 enableValidation(validationConfig);
 

@@ -1,12 +1,13 @@
 function toggleInputError(formElement, inputElement, errorMessage = "") {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  
   if (errorMessage) {
-    inputElement.classList.add("form__input_type_error");
+    inputElement.classList.add(validationConfig.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add("form__input-error_active");
+    errorElement.classList.add(validationConfig.errorClass);
   } else {
-    inputElement.classList.remove("form__input_type_error");
-    errorElement.classList.remove("form__input-error_active");
+    inputElement.classList.remove(validationConfig.inputErrorClass);
+    errorElement.classList.remove(validationConfig.errorClass);
     errorElement.textContent = "";
   }
 }
@@ -84,3 +85,12 @@ export function enableValidation() {
     setEventListeners(formElement);
   });
 }
+
+export const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "form__input-error_active",
+};
