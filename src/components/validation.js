@@ -28,10 +28,10 @@ function hasInvalidInput(inputList) {
 
 export function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("button_inactive");
+    buttonElement.classList.add(validationConfig.inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
   } else {
-    buttonElement.classList.remove("button_inactive");
+    buttonElement.classList.remove(validationConfig.inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
   }
 }
@@ -67,8 +67,8 @@ function checkInputValidity(formElement, inputElement) {
 }
 
 function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-  const buttonElement = formElement.querySelector(".popup__button");
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   toggleButtonState(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
@@ -80,17 +80,8 @@ function setEventListeners(formElement) {
 }
 
 export function enableValidation() {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement);
   });
 }
-
-export const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "form__input-error_active",
-};

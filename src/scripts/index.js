@@ -1,7 +1,7 @@
 import "../pages/index.css";
 import { createCard, handleLikeButtonClick } from "../components/card";
 import { openModal, closeModal, handleModalClose } from "../components/modal";
-import { enableValidation, clearValidation, validationConfig } from "../components/validation";
+import { enableValidation, clearValidation } from "../components/validation";
 import * as api from "../components/api.js";
 
 const placesContainer = document.querySelector(".places__list");
@@ -38,6 +38,15 @@ const descriptionInput = editProfileForm.elements["about"];
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 let cardElementToDelete;
+
+window.validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "form__input-error_active",
+};
 
 confirmDeleteForm.addEventListener("submit", (event) => {
   event.preventDefault();
